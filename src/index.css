@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* SexyHub Design System - Fundo preto, textos brancos, detalhes rosa */
+
+@layer base {
+  :root {
+    /* SexyHub Color Palette */
+    --background: 0 0% 6%;
+    --foreground: 0 0% 98%;
+    
+    /* Primary Pink #e91e63 */
+    --primary: 340 82% 52%;
+    --primary-foreground: 0 0% 98%;
+    --primary-glow: 340 82% 62%;
+    
+    /* Card and surfaces */
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 95%;
+    
+    /* Secondary grays */
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 90%;
+    
+    /* Muted elements */
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 65%;
+    
+    /* Accent (lighter pink) */
+    --accent: 340 82% 55%;
+    --accent-foreground: 0 0% 98%;
+    
+    /* Status colors */
+    --online: 142 76% 36%;
+    --offline: 0 0% 45%;
+    --busy: 25 95% 53%;
+    
+    /* Borders and inputs */
+    --border: 0 0% 20%;
+    --input: 0 0% 15%;
+    --ring: 340 82% 52%;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(340 82% 52%), hsl(340 82% 62%));
+    --gradient-dark: linear-gradient(180deg, hsl(0 0% 8%), hsl(0 0% 4%));
+    --gradient-card: linear-gradient(135deg, hsl(0 0% 10%), hsl(0 0% 8%));
+    
+    /* Shadows */
+    --shadow-pink: 0 10px 30px -10px hsl(340 82% 52% / 0.4);
+    --shadow-glow: 0 0 40px hsl(340 82% 62% / 0.3);
+    --shadow-card: 0 8px 25px -5px hsl(0 0% 0% / 0.5);
+    
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    
+    --radius: 0.8rem;
+    
+    /* Popover */
+    --popover: 0 0% 8%;
+    --popover-foreground: 0 0% 95%;
+    
+    /* Destructive */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-['Montserrat',sans-serif];
+  }
+}
+
+@layer components {
+  /* SexyHub Button Variants */
+  .btn-hero {
+    @apply bg-gradient-to-r from-primary to-primary-glow text-primary-foreground font-medium px-8 py-4 rounded-xl hover:shadow-[var(--shadow-pink)] transform hover:scale-105 transition-all duration-300;
+  }
+  
+  .btn-outline-pink {
+    @apply border-2 border-primary text-primary bg-transparent hover:bg-primary hover:text-primary-foreground transition-all duration-300;
+  }
+  
+  .btn-ghost-pink {
+    @apply text-primary hover:bg-primary/10 hover:text-primary-glow transition-all duration-200;
+  }
+  
+  /* Creator Card Styles */
+  .creator-card {
+    @apply bg-gradient-to-br from-card to-secondary border border-border rounded-2xl overflow-hidden hover:shadow-[var(--shadow-card)] transform hover:scale-[1.02] transition-all duration-300;
+  }
+  
+  /* Status Indicators */
+  .status-online {
+    @apply w-3 h-3 bg-green-500 rounded-full animate-pulse;
+  }
+  
+  .status-offline {
+    @apply w-3 h-3 bg-gray-500 rounded-full;
+  }
+  
+  .status-busy {
+    @apply w-3 h-3 bg-orange-500 rounded-full;
+  }
+  
+  /* Chat Elements */
+  .chat-message {
+    @apply bg-card border border-border rounded-lg p-3 max-w-xs;
+  }
+  
+  .chat-message-sent {
+    @apply bg-primary text-primary-foreground ml-auto;
+  }
+  
+  /* Premium Elements */
+  .premium-glow {
+    @apply relative;
+  }
+  
+  .premium-glow::before {
+    content: '';
+    @apply absolute -inset-1 bg-gradient-to-r from-primary to-primary-glow rounded-2xl blur opacity-75 -z-10;
+  }
+  
+  /* Hover Effects */
+  .hover-glow:hover {
+    @apply shadow-[var(--shadow-glow)];
+  }
+  
+  /* Page Transitions */
+  .page-enter {
+    @apply animate-fade-in;
+  }
+
+  /* Hide scrollbar for horizontal scroll in admin tabs */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Line clamp for mobile text truncation */
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
