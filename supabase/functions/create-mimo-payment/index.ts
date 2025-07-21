@@ -161,7 +161,7 @@ serve(async (req) => {
 
     let pushInPayResponse;
     try {
-      pushInPayResponse = await fetch('https://app.pushinpay.com.br/api/pix', {
+      pushInPayResponse = await fetch("https://api.pushinpay.com.br/api/pix/cashIn", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -195,12 +195,20 @@ serve(async (req) => {
     
     try {
       responseText = await pushInPayResponse.text();
-      console.log('PushInPay raw response:', responseText);
-      
+      console.log("PushInPay raw response:", responseText);
       if (responseText.trim()) {
-        pushInPayData = JSON.parse(responseText);
+        try {
+          pushInPayData = JSON.parse(responseText);
+        } catch (jsonParseError) {
+          console.error("Error parsing PushInPay response as JSON:", jsonParseError);
+          pushInPayData = {
+            error: "Invalid JSON response from payment gateway",
+            raw: responseText,
+            parseError: jsonParseError.message
+          };
+        }
       } else {
-        pushInPayData = { error: 'Empty response from PushInPay' };
+        pushInPayData = { error: "Empty response from PushinPay" };
       }
     } catch (parseError) {
       console.error('Error parsing PushInPay response as JSON:', parseError);
